@@ -24,16 +24,7 @@ public class CustomLayout extends ViewGroup {
         super(context, attrs, 0);
     }
 
-    public CustomLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CustomLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
+ 
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -51,9 +42,7 @@ public class CustomLayout extends ViewGroup {
 
             if (childView.getVisibility() != GONE) {
                 rightView = leftView + childView.getMeasuredWidth();
-                if (rightView > deviceWidth) {
-                    throw new IllegalStateException("Перебор по длине! "+rightView + " "+ deviceWidth);
-                }
+
                 childView.layout(leftView, topView, rightView, childView.getMeasuredHeight());
 
                 leftView = rightView;
@@ -100,20 +89,5 @@ public class CustomLayout extends ViewGroup {
                 resolveSize(maxHeight, heightMeasureSpec));
     }
 
-
-    @Override
-    protected LayoutParams generateDefaultLayoutParams() {
-        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-    }
-
-    @Override
-    protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
-        return new LayoutParams(p);
-    }
-
-    @Override
-    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
-        return p instanceof LayoutParams;
-    }
 
 }
